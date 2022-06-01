@@ -19,8 +19,8 @@ unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
 //Fungsi Kredensial Koneksi WiFi
-const char* ssid = "Keluarga"; //masukkan ssid
-const char* password = "MyFamily"; //masukkan password
+const char* ssid = "SSID Kamu"; //masukkan ssid
+const char* password = "Password Wifi Kamu"; //masukkan password
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Board Bebas Angka 1-seterusnya
