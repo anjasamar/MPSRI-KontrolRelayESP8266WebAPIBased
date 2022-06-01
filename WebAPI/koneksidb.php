@@ -3,8 +3,8 @@
 //Simpan dengan nama file koneksidb.php
 
 $server       = "localhost";
-$user         = "esprelay";
-$password     = "esp123";
+$user         = "user";
+$password     = "password";
 $database     = "atsi_relay_db"; //Nama Database di phpMyAdmin
 
 $koneksi      = mysqli_connect($server, $user, $password, $database);
