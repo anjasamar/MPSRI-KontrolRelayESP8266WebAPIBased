@@ -11,8 +11,8 @@
 #include <Arduino_JSON.h>
 
 //=========================================================Setup-Server=======================================================================
-//Web/Server API address to read/write from 
-const char *HostServer = "http://mpsri.my-board.org";   //Default: http://mpsri.my-board.org website or IP address of server
+//Web/Server API untuk read/write dari
+const char *HostServer = "http://mpsri.my-board.org";   //Default: http://mpsri.my-board.org website atau AlamatIP dari server
 //Fungsi Limit Request On/Off Dari Web Ke ESP
 const long interval = 10; //3000
 unsigned long previousMillis = 0;
@@ -33,13 +33,13 @@ void setup () {
   WiFi.begin(ssid, password); 
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting..");
+    Serial.println("Menghubungkan ke Wifi..");
   }
   if(WiFi.status() == WL_CONNECTED){
-    Serial.println("Connected!!!");
+    Serial.println("Tersambung dengan Wifi!!!");
   }
   else{
-    Serial.println("Connected Failed!!!");
+    Serial.println("Koneksi Wifi gagal!!!");
   }
   
 }
@@ -55,10 +55,10 @@ void loop() {
   DeviceData = String(board);
   Link = String(HostServer);  
       //GET Data
-      GetData = "?board=" + DeviceData ;  //Note "?" added at front
+      GetData = "?board=" + DeviceData ;  //Catatan "?" ditambahkan di depan
       url = Link + "/proses.php" + GetData;
 
-      http.begin(client, url); //Specify request destination
+      http.begin(client, url); //Tentukan tujuan permintaan
   
      //Fungsi Mendapatkan Balasan HTTP Request     
      int httpCode = http.GET();
