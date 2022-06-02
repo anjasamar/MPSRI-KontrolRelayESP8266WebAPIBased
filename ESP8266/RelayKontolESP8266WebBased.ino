@@ -133,6 +133,7 @@ void loop() {
 
   //Konfrensi Alamat Server Api
   String LinkRelay;
+  String URLServer = "http://"+String(host);
   LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board);
   http.begin(client, LinkRelay);
   
@@ -197,7 +198,7 @@ void loop() {
   lcd.setCursor(0,0);
   lcd.print("URL Server:");
   // print pesan skrol
-  scrollText(1, LinkRelay, 260, lcdColumns);
+  scrollText(1, URLServer, 260, lcdColumns);
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("Pada Port: ");lcd.print(httpPort);
