@@ -1,8 +1,8 @@
-//---------------------------------------------------
-//Project: Kontrol Relay Berbasis Web API Request   |
-//Author: Anjas Amar Pradana                        |
-//Program khusus board: esp8266 (Nodemcu)           |
-//---------------------------------------------------
+//-----------------------------------------------------------------------
+//Project: Kontrol Relay Berbasis Web API Request With LCD Monitoring   |
+//Author: Anjas Amar Pradana                                            |
+//Program khusus board: esp8266 (Nodemcu)                               |
+//-----------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
 #include <ESP8266WiFi.h>
