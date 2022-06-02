@@ -139,7 +139,6 @@ void loop() {
     //Cek Status Port Server Apakah Dapat Terhubung
     if(!client.connect(host, httpPort)){
       Serial.println("Gagal Terhubung Ke Server Api");
-      return;
       }
       Serial.println("Berhasil Terhubung Ke Server Api");
   
