@@ -25,7 +25,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "http://Alamat_server_anda";
+String host = "alamat_server_anda"; //Contoh: anjasganteng.com
 
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
@@ -47,6 +47,7 @@ int board = 1;
 void setup () {
   String messageStartUp = "Memulai Sistem";
   Serial.begin(115200);
+  Serial.print("Memulai Sistem Tunggu...");
   // initialize LCD
   lcd.init();
   // nyalakan lampu latar LCD                      
@@ -102,7 +103,7 @@ void setup () {
 }
 
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
-String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266 Berbasis Web IoT";
+String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
 
 // Fungsi untuk text skrol Judul projek
 // Fungsi menerima argumen berikut::
@@ -134,13 +135,6 @@ void loop() {
   String LinkRelay;
   LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board);
   http.begin(client, LinkRelay);
-  Serial.println(LinkRelay);
-  
-    //Cek Status Port Server Apakah Dapat Terhubung
-    if(!client.connect(host, httpPort)){
-      Serial.println("Gagal Terhubung Ke Server Api");
-      }
-      Serial.println("Berhasil Terhubung Ke Server Api");
   
     //Fungsi Mendapatkan Balasan HTTP Request     
     int httpCode = http.GET();
@@ -158,6 +152,8 @@ void loop() {
             //Membaca Status Server Api
             String payload = http.getString();
             JSONVar myObject = JSON.parse(payload);
+            Serial.print("Payload = ");
+            Serial.println(payload);
             Serial.print("JSON object payload = ");
             Serial.print(httpCode);
             Serial.println(myObject);
@@ -180,10 +176,35 @@ void loop() {
   }
 
   //Menampilkan Status Kode HTTP Respond, Dan Status Alamat WiFi
+  Serial.println(LinkRelay);
+  
+  //Cek Status Port Server Apakah Dapat Terhubung
+  if(!client.connect(host, httpPort)){
+     Serial.print("Gagal Terhubung Ke Server Api -> ");
+  }
+  Serial.print("Berhasil Terhubung Ke Server Api -> ");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Status Diperbarui");
+  delay(2000);
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print(F("Status API: "));lcd.print(httpCode);
   lcd.setCursor(0,1);
   lcd.print(WiFi.localIP());
-  delay(700);
+  delay(3000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("URL Server:");
+  // print pesan skrol
+  scrollText(1, LinkRelay, 260, lcdColumns);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Pada Port: ");lcd.print(httpPort);
+  delay(3000);
+  lcd.clear();
+  lcd.print("Cek Status Relay");
+  lcd.setCursor(0,1);
+  lcd.print("Dalam 3 detik...");
+  delay(3000);
 }
