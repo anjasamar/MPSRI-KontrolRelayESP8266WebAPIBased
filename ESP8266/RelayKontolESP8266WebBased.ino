@@ -31,7 +31,7 @@ String host = "http://Alamat_server_anda";
 const int httpPort = 80;
 
 //Fungsi Limit Request On/Off Dari Web Ke ESP
-const long interval = 100; //3000
+const long interval = 10; //5000
 unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
