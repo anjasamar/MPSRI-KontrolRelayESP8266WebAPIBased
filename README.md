@@ -1,5 +1,5 @@
 # KontrolRelayESP8266WebAPIBased
-To Decrypt WebAPI Dir File, Please Contact Us On: mailto:atsidev.io@gmail.com/mailto:Rizkiheripurwanto99@gmail.com
+To Decrypt WebAPI Dir File, Please Contact Us On: atsidev.io@gmail.com / Rizkiheripurwanto99@gmail.com
 
 
 # 💫About Me :
