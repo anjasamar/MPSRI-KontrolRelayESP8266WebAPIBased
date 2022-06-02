@@ -27,7 +27,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 //Alamat Server Api
 String host = "http://alamat_server_anda";
 
-//Cek Alamat Server Dapat Terhubung
+//Port Server Yang Dapat Terhubung
 const int httpPort = 80;
 
 //Fungsi Limit Request On/Off Dari Web Ke ESP
