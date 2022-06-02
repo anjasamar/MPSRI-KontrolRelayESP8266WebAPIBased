@@ -14,6 +14,8 @@
 #include <Arduino_JSON.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+#include <WiFiManager.h>         // https://github.com/tzapu/WiFiManager
+#include <DNSServer.h>
 
 //===========================================================Setup-LCD========================================================================
 // atur jumlah kolom dan baris LCD
@@ -28,8 +30,8 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "Alamat-Server-Anda"; //Contoh: anjasganteng.com
-
+String host = "192.168.88.16"; //Contoh: anjasganteng.com
+// Set web server port number to 80
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
 
@@ -38,40 +40,71 @@ const long interval = 100; //10000
 unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
-//Fungsi Kredensial Koneksi WiFi
-const char* ssid = "SSID WiFi"; //masukkan ssid
-const char* password = "Password WiFi"; //masukkan password
+//Fungsi Kredensial Koneksi WiFi Manual, Silakan Isi Data Di bawah, Jika Anda Menggunakan Fitur Ini Setup Wifi Manager Tidak Akan Bekerja
+const char* ssid = ""; //masukkan ssid
+const char* password = ""; //masukkan password
+const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
+const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Board Bebas Angka 1-seterusnya
 int board = 1;
 
-//=========================================================Void-Setup=========================================================================
+//==========================================================Void-Setup=========================================================================
 void setup () {
+
+Serial.begin(115200);
+  
   String messageStartUp = "Memulai Sistem";
-  Serial.begin(115200);
+  String messageSetupWifi = "Silakan Atur Koneksi Wifi Pada Akses Poin ESP-MPSRI-SETUP Untuk Menggunakan MPSRI";
   Serial.print("Memulai Sistem Tunggu...");
   // initialize LCD
   lcd.init();
   // nyalakan lampu latar LCD                      
   lcd.backlight();
-
   lcd.setCursor(0,0);
   // print pesan statis
   lcd.print(messageStartUp);
   lcd.blink();
-  delay(2000);
+  delay(7000);
   lcd.setCursor(0,1);
   lcd.print("Memulai I/O");
   lcd.blink();
-  delay(4000);
+  delay(3000);
   lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Web Client: OK");
-  delay(1000);
+  lcd.blink();
   lcd.setCursor(0,1);
-  lcd.print("Program: OK");
-  delay(1000);
+  lcd.print("Atur Koneksi!>");
+  lcd.setCursor(0,0);
+  // print pesan skrol
+  scrollText(0, messageSetupWifi, 260, lcdColumns);
+  delay(3000);
+  
+//=====================================================WiFiManager-Module========================================================================
+//Fungsi Kredensial Koneksi WiFi Sistem Web WifiManager
+WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
+    WiFiManager wm;
+    // reset settings - wipe stored credentials for testing
+    // these are stored by the esp library
+    wm.resetSettings();
+    // Terhubung secara otomatis menggunakan kredensial yang disimpan,
+    // jika koneksi gagal, itu memulai jalur akses dengan nama yang ditentukan ( "ESP-MPSRI-SETUP"),
+    // jika kosong akan otomatis menghasilkan SSID, jika kata sandi kosong akan menjadi AP anonim (wm.autoConnect())
+    // kemudian masuk ke loop pemblokiran menunggu konfigurasi dan akan mengembalikan hasil sukses
+    bool res;
+    // res = wm.autoConnect(); // auto generated nama AP dari chipid
+    // res = wm.autoConnect("AutoConnectAP"); // anonymous ap
+    res = wm.autoConnect(namaAP,passwordAP); // Mengamankan Aksespoint ESP8266
+    if(!res) {
+        Serial.println("Failed to connect");
+        // ESP.restart();
+    } 
+    else {
+        //jika Anda sampai di sini, Anda telah terhubung ke WiFi    
+        Serial.println("connected...yeey :)");
+    }
+
+  delay(6000);
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("WiFi: OK");
@@ -79,7 +112,20 @@ void setup () {
   lcd.setCursor(0,1);
   lcd.print("Status WiFi: ");
   lcd.print(WiFi.status());
+  delay(6000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("IP Wifi:");
+  lcd.setCursor(0,1);
+  lcd.print(WiFi.localIP());
   delay(3000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Web Client: OK");
+  delay(2000);
+  lcd.setCursor(0,1);
+  lcd.print("Program: OK");
+  delay(2000);
   lcd.clear();
   lcd.print("Memulai Program");
   lcd.blink();
@@ -89,6 +135,7 @@ void setup () {
   lcd.noBlink();
   lcd.clear();
 //=========================================================WiFi-Module========================================================================
+//Module Wifi Jika Menggunakan Pengaturan Manual
   WiFi.hostname("Perangkat Driver Relay");
   WiFi.begin(ssid, password); 
   while (WiFi.status() != WL_CONNECTED) {
@@ -105,7 +152,6 @@ void setup () {
   
 }
 
-//====================================================LCD-Scroll-Text-Module==================================================================
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
 String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
 
@@ -138,7 +184,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/rk/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya
+  LinkRelay = "http://"+String(host)+"/relaykontrol/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
@@ -192,7 +238,7 @@ void loop() {
 //====================================================LCD-Info-Module===================================================================
   lcd.clear();
   lcd.setCursor(0,0);
-  lcd.print("Status Update ON");
+  lcd.print("Status Updated >");
   delay(6000);
   lcd.clear();
   lcd.setCursor(0,0);
