@@ -1,8 +1,10 @@
-//-----------------------------------------------------------------------
-//Project: Kontrol Relay Berbasis Web API Request With LCD Monitoring   |
-//Author: Anjas Amar Pradana                                            |
-//Program khusus board: esp8266 (Nodemcu)                               |
-//-----------------------------------------------------------------------
+
+//---------------------------------------------------
+//Project: Kontrol Relay Berbasis Web API Request   |
+//Author: Anjas Amar Pradana                        |
+//Mail: atsidev.io@gmail.com                        |
+//Program khusus board: esp8266 (Nodemcu)           |
+//---------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
 #include <ESP8266WiFi.h>
@@ -13,6 +15,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
+//===========================================================Setup-LCD========================================================================
 // atur jumlah kolom dan baris LCD
 int lcdColumns = 16;
 int lcdRows = 2;
@@ -25,13 +28,13 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "alamat_server_anda"; //Contoh: anjasganteng.com
+String host = "Alamat-Server-Anda"; //Contoh: anjasganteng.com
 
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
 
 //Fungsi Limit Request On/Off Dari Web Ke ESP
-const long interval = 10; //5000
+const long interval = 100; //10000
 unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
@@ -134,7 +137,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board);
+  LinkRelay = "http://"+String(host)+"/rk/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
@@ -184,10 +187,12 @@ void loop() {
      Serial.print("Gagal Terhubung Ke Server Api -> ");
   }
   Serial.print("Berhasil Terhubung Ke Server Api -> ");
+  
+//====================================================LCD-Info-Module===================================================================
   lcd.clear();
   lcd.setCursor(0,0);
-  lcd.print("Status Diperbarui");
-  delay(2000);
+  lcd.print("Status Update ON");
+  delay(6000);
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print(F("Status API: "));lcd.print(httpCode);
@@ -209,3 +214,10 @@ void loop() {
   lcd.print("Dalam 3 detik...");
   delay(3000);
 }
+
+//---------------------------------------------------
+//Project: Kontrol Relay Berbasis Web API Request   |
+//Author: Anjas Amar Pradana                        |
+//Mail: atsidev.io@gmail.com                        |
+//Program khusus board: esp8266 (Nodemcu)           |
+//---------------------------------------------------
