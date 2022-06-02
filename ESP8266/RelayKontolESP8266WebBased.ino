@@ -25,9 +25,9 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "http://alamat_server_anda";
+String host = "http://mpsri.my-board.org";
 
-//Port Server Yang Dapat Terhubung
+//Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
 
 //Fungsi Limit Request On/Off Dari Web Ke ESP
@@ -36,8 +36,8 @@ unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
 //Fungsi Kredensial Koneksi WiFi
-const char* ssid = "SSID Wifi"; //masukkan ssid
-const char* password = "Password WiFi"; //masukkan password
+const char* ssid = "Keluarga"; //masukkan ssid
+const char* password = "19091999"; //masukkan password
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Board Bebas Angka 1-seterusnya
@@ -152,6 +152,8 @@ void loop() {
   //Fungsi Payload Atau Pemanggialan Dan Penerimaan Data Status I/O High/Low Pada Pin GPIO
   if(currentMillis - previousMillis >= interval) {
       if (WiFi.status() == WL_CONNECTED) {
+
+        //Jika Status Server Tidak Terhubung Maka Akan Mengeluarkan Hasil Output -Digit Contoh -1 Pada LCD, Sebaliknya Jika Status Server Terhubung Maka Akan Mengrluarkan Output >Digit Contoh 200
         if (httpCode > 0) {
           
             //Membaca Status Server Api
@@ -165,9 +167,9 @@ void loop() {
             //Membaca Status Value Output Server Api, Lalu Memulai Program Ke Relay
             for (int i = 0; i < keys.length(); i++) {
                 JSONVar value = myObject[keys[i]];
-                Serial.print("GPIO: ");
+                Serial.print("GPIO KE: ");
                 Serial.print(keys[i]);
-                Serial.print(" - SET to: ");
+                Serial.print(" - SET Value KE: ");
                 Serial.println(value);
                 pinMode(atoi(keys[i]), OUTPUT);
                 digitalWrite(atoi(keys[i]), atoi(value));
