@@ -102,7 +102,7 @@ void setup () {
 }
 
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
-String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
+String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266 Berbasis Web IoT";
 
 // Fungsi untuk text skrol Judul projek
 // Fungsi menerima argumen berikut::
