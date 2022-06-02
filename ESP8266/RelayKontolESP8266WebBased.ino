@@ -105,6 +105,7 @@ void setup () {
   
 }
 
+//====================================================LCD-Scroll-Text-Module==================================================================
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
 String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
 
