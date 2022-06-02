@@ -25,7 +25,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "http://mpsri.my-board.org";
+String host = "http://Alamat_server_anda";
 
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
@@ -36,8 +36,8 @@ unsigned long previousMillis = 0;
 
 //=========================================================Setup-WiFi=========================================================================
 //Fungsi Kredensial Koneksi WiFi
-const char* ssid = "Keluarga"; //masukkan ssid
-const char* password = "19091999"; //masukkan password
+const char* ssid = "SSID WiFi"; //masukkan ssid
+const char* password = "Password WiFi"; //masukkan password
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Board Bebas Angka 1-seterusnya
@@ -128,12 +128,12 @@ void loop() {
 //====================================================WebAPIRequest-Module===================================================================
   //Declare object of class HTTPClient
   WiFiClient client;
-  HTTPClient httpRelay;
+  HTTPClient http;
 
   //Konfrensi Alamat Server Api
   String LinkRelay;
   LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board);
-  httpRelay.begin(client, LinkRelay);
+  http.begin(client, LinkRelay);
   Serial.println(LinkRelay);
   
     //Cek Status Port Server Apakah Dapat Terhubung
@@ -144,7 +144,7 @@ void loop() {
       Serial.println("Berhasil Terhubung Ke Server Api");
   
     //Fungsi Mendapatkan Balasan HTTP Request     
-    int httpCode = httpRelay.GET();
+    int httpCode = http.GET();
     
     //Fungsi Untuk Mengituli Limit Request On/Off Yang Tadi Di Awal Program
     unsigned long currentMillis = millis();
@@ -157,9 +157,9 @@ void loop() {
         if (httpCode > 0) {
           
             //Membaca Status Server Api
-            String payloadResponse = httpRelay.getString();
-            JSONVar myObject = JSON.parse(payloadResponse);
-            Serial.print("JSON object = ");
+            String payload = http.getString();
+            JSONVar myObject = JSON.parse(payload);
+            Serial.print("JSON object payload = ");
             Serial.print(httpCode);
             Serial.println(myObject);
             JSONVar keys = myObject.keys();
@@ -176,7 +176,7 @@ void loop() {
              }  
            previousMillis = currentMillis;   
          }
-        httpRelay.end();
+        http.end();
       }
   }
 
