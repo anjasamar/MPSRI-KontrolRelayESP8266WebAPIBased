@@ -4,6 +4,7 @@
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
+//Official Sites: http://atsi.mpsri.skom.id                                       |
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
@@ -48,7 +49,7 @@ const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
-//ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
+//ID Token Board, Silakan Masuk Ke Akun Anda Atau Daftar Di http://atsi.mpsri.skom.id Untuk Membuat Dan Melihat Token Anda Sendiri
 String board = "atsi-mpsri-token-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; //Token Contoh: atsi-mpsri-token-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 //==========================================================Void-Setup=========================================================================
@@ -268,4 +269,5 @@ void loop() {
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
+//Official Sites: http://atsi.mpsri.skom.id                                       |
 //---------------------------------------------------------------------------------
