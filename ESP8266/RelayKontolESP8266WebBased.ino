@@ -30,7 +30,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "Alamat-Server-Anda"; //Contoh: www.anjasganteng.com (tanpa tanda baca, dan http:// atau http://
+String host = "alamat.url.anda"; //Contoh: www.anjasganteng.com (tanpa tanda baca, slash akhir, dan http:// atau http://
 
 // Set web server port number to 80
 //Cek Alamat Server Dapat Terhubung
@@ -48,8 +48,8 @@ const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
-//ID Board Bebas Angka 1-seterusnya
-int board = 1;
+//ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
+String board = "atsi-mpsri-token-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; //Token Contoh: atsi-mpsri-token-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 //==========================================================Void-Setup=========================================================================
 void setup () {
@@ -73,9 +73,9 @@ Serial.begin(115200);
   lcd.blink();
   delay(3000);
   lcd.clear();
-  lcd.blink();
   lcd.setCursor(0,1);
   lcd.print("Atur Koneksi!>");
+  lcd.blink();
   lcd.setCursor(0,0);
   // print pesan skrol
   scrollText(0, messageSetupWifi, 260, lcdColumns);
@@ -185,7 +185,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/relaykontrol/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
+  LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
