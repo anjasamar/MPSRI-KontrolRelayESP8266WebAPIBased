@@ -4,7 +4,7 @@
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
-//Official Sites: http://atsidev.mpsri.skom.id                                    |
+//Official Sites: http://mpsri.skom.id                                    |
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
@@ -269,5 +269,5 @@ void loop() {
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
-//Official Sites: http://atsidev.mpsri.skom.id                                    |
+//Official Sites: http://mpsri.skom.id                                    |
 //---------------------------------------------------------------------------------
