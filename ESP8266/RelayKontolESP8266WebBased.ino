@@ -50,7 +50,7 @@ const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Token Board, Silakan Masuk Ke Akun Anda Atau Daftar Di http://atsidev.mpsri.skom.id Untuk Membuat Dan Melihat Token Anda Sendiri
-int board = "XXXXXXXXXXXXXXXXXXXX"; //Token Contoh: 12345678901234567890
+int board = XXXXXXXXXXXXXXXXXXXX; //Token Contoh: 12345678901234567890
 
 //==========================================================Void-Setup=========================================================================
 void setup () {
@@ -186,7 +186,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
+  LinkRelay = "http://"+String(host)+"/proses.php?api="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
