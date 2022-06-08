@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
-//===============================================Do-Not-Change-On-This-Section===================================================================
+//===============================================Do-Not-Change-On-This-Section================================================================
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266HTTPClient.h>
@@ -18,7 +18,8 @@
 #include <Wire.h>
 #include <WiFiManager.h>         // https://github.com/tzapu/WiFiManager
 #include <DNSServer.h>
-//============================================End-Of-Do-Not-Change-On-This-Section========================================================
+//======================================================End-Of-Perpus-Fungsi==================================================================
+//============================================End-Of-Do-Not-Change-On-This-Section============================================================
 //===========================================================Setup-LCD========================================================================
 // atur jumlah kolom dan baris LCD
 int lcdColumns = 16;
@@ -29,7 +30,7 @@ int lcdRows = 2;
 // abaikan jika error terjadi saat kompiler, yang mengatakan tidak support untuk jenis board anda selain AVR,
 // ini saya menggunakan perpustakaan dan mengubahnya di properti perpustakaan lalu menambahkan perangkat modul saya.
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
-
+//=======================================================End-Of-Setup-LCD=====================================================================
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
 String host = "mpsri.atwebpages.com"; //Contoh: www.anjasganteng.com (tanpa tanda baca, dan http:// atau http://
@@ -37,23 +38,22 @@ String host = "mpsri.atwebpages.com"; //Contoh: www.anjasganteng.com (tanpa tand
 // Set web server port number to 80
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
-
 //Fungsi Limit Request On/Off Dari Web Ke ESP
 const long interval = 100; //10000
 unsigned long previousMillis = 0;
-
+//======================================================End-Of-Setup-Server===================================================================
 //=========================================================Setup-WiFi=========================================================================
 //Fungsi Kredensial Koneksi WiFi Manual, Silakan Isi Data Di bawah, Jika Anda Menggunakan Fitur Ini Setup Wifi Manager Tidak Akan Bekerja
 const char* ssid = ""; //masukkan ssid
 const char* password = ""; //masukkan password
 const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
-
 //=========================================================Setup-IDBoard======================================================================
 //ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
 String api = "atsi-mpsri-1234567890"; //Token Contoh: atsi-mpsri-xxxxxxxxxx
+//======================================================End-Of-Perpus-Fungsi==================================================================
 
-//==========================================================Void-Setup=========================================================================
+//==========================================================Void-Setup========================================================================
 void setup () {
 
 Serial.begin(115200);
@@ -177,34 +177,29 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
     delay(delayTime);
   }
 }
-//============================================End-Of-Do-Not-Change-On-This-Section========================================================
-//=========================================================Void-Loop=========================================================================
+//======================================================End-Of-Void-Setup==================================================================
+//============================================End-Of-Do-Not-Change-On-This-Section=========================================================
+//=========================================================Void-Loop=======================================================================
 void loop() {
-//====================================================WebAPIRequest-Module===================================================================
-//===============================================Do-Not-Change-On-This-Section===================================================================
+//====================================================WebAPIRequest-Module=================================================================
+//===============================================Do-Not-Change-On-This-Section=============================================================
   //Declare object of class HTTPClient
   WiFiClient client;
   HTTPClient http;
-
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
   LinkRelay = "http://"+String(host)+"/api.php?id_token="+String(api);
   http.begin(client, LinkRelay);
-  
     //Fungsi Mendapatkan Balasan HTTP Request     
     int httpCode = http.GET();
-    
     //Fungsi Untuk Mengituli Limit Request On/Off Yang Tadi Di Awal Program
     unsigned long currentMillis = millis();
-
   //Fungsi Payload Atau Pemanggialan Dan Penerimaan Data Status I/O High/Low Pada Pin GPIO
   if(currentMillis - previousMillis >= interval) {
       if (WiFi.status() == WL_CONNECTED) {
-
         //Jika Status Server Tidak Terhubung Maka Akan Mengeluarkan Hasil Output -Digit Contoh -1 Pada LCD, Sebaliknya Jika Status Server Terhubung Maka Akan Mengrluarkan Output >Digit Contoh 200
         if (httpCode > 0) {
-          
             //Membaca Status Server Api
             String payload = http.getString();
             JSONVar myObject = JSON.parse(payload);
@@ -214,7 +209,6 @@ void loop() {
             Serial.print(httpCode);
             Serial.println(myObject);
             JSONVar keys = myObject.keys();
-
             //Membaca Status Value Output Server Api, Lalu Memulai Program Ke Relay
             for (int i = 0; i < keys.length(); i++) {
                 JSONVar value = myObject[keys[i]];
@@ -230,15 +224,14 @@ void loop() {
         http.end();
       }
   }
-
   //Menampilkan Status Kode HTTP Respond, Dan Status Alamat WiFi
   Serial.println(LinkRelay);
-  
   //Cek Status Port Server Apakah Dapat Terhubung
   if(!client.connect(host, httpPort)){
      Serial.print("Gagal Terhubung Ke Server Api -> ");
   }
   Serial.print("Berhasil Terhubung Ke Server Api -> ");
+//===============================================End-Of-WebAPIRequest-Module==============================================================
 //============================================End-Of-Do-Not-Change-On-This-Section========================================================
 //====================================================LCD-Info-Module=====================================================================
   lcd.clear();
@@ -266,7 +259,7 @@ void loop() {
   lcd.print("Dalam 3 detik...");
   delay(3000);
 }
-
+//===============================================End-Of-LCD-Info-Module==============================================================
 //---------------------------------------------------------------------------------
 //Project: Kontrol Relay Berbasis Web API Request, LCD Monitor, Dan WiFiManager   |
 //Author: Anjas Amar Pradana                                                      |
