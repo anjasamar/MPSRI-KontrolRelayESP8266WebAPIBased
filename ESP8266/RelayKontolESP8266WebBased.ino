@@ -4,7 +4,7 @@
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
-//Official Sites: http://mpsri.skom.id OR http://mpsri.my-board.org               |
+//Official Web API Service: http://mpsri.atwebpages.com                           |
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
@@ -31,7 +31,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "alamat.url.anda"; //Contoh: www.anjasganteng.com (tanpa tanda baca, slash akhir, dan http:// atau http://
+String host = "mpsri.atwebpages.com"; //Contoh: www.anjasganteng.com (tanpa tanda baca, dan http:// atau http://
 
 // Set web server port number to 80
 //Cek Alamat Server Dapat Terhubung
@@ -49,8 +49,8 @@ const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
-//ID Token Board, Silakan Masuk Ke Akun Anda Atau Daftar Di http://atsidev.mpsri.skom.id Untuk Membuat Dan Melihat Token Anda Sendiri
-int board = XXXXXXXXXXXXXXXXXXXX; //Token Contoh: 12345678901234567890
+//ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
+String api = "atsi-mpsri-2917439829"; //Token Contoh: XXXXXXXXXXXXXXXXXXXX
 
 //==========================================================Void-Setup=========================================================================
 void setup () {
@@ -186,7 +186,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/proses.php?api="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
+  LinkRelay = "http://"+String(host)+"/api.php?id_token="+String(api); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
@@ -269,5 +269,5 @@ void loop() {
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
-//Official Sites: http://mpsri.skom.id OR http://mpsri.my-board.org               |
+//Official Web API Service: http://mpsri.atwebpages.com                           |
 //---------------------------------------------------------------------------------
