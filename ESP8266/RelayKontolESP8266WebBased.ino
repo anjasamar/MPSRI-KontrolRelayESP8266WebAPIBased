@@ -50,7 +50,7 @@ const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
-String api = "atsi-mpsri-2917439829"; //Token Contoh: XXXXXXXXXXXXXXXXXXXX
+String api = "atsi-mpsri-1234567890"; //Token Contoh: XXXXXXXXXXXXXXXXXXXX
 
 //==========================================================Void-Setup=========================================================================
 void setup () {
