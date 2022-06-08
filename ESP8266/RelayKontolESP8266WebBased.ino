@@ -1,7 +1,7 @@
 
 //---------------------------------------------------------------------------------
 //Project: Kontrol Relay Berbasis Web API Request, LCD Monitor, Dan WiFiManager   |
-//Author: Anjas Amar Pradana                                                      |
+//Author: master Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
 //Official Web API Service: http://mpsri.atwebpages.com                           |
