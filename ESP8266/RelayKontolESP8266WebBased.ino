@@ -55,9 +55,7 @@ String api = "atsi-mpsri-1234567890"; //Token Contoh: atsi-mpsri-xxxxxxxxxx
 
 //==========================================================Void-Setup========================================================================
 void setup () {
-
 Serial.begin(115200);
-  
   String messageStartUp = "Memulai Sistem";
   String messageSetupWifi = "Silakan Atur Koneksi Wifi Pada Akses Poin ESP-MPSRI-SETUP Untuk Menggunakan MPSRI";
   Serial.print("Memulai Sistem Tunggu...");
@@ -82,7 +80,6 @@ Serial.begin(115200);
   // print pesan skrol
   scrollText(0, messageSetupWifi, 260, lcdColumns);
   delay(3000);
-  
 //=====================================================WiFiManager-Module========================================================================
 //===============================================Do-Not-Change-On-This-Section===================================================================
 //Fungsi Kredensial Koneksi WiFi Sistem Web WifiManager
@@ -107,6 +104,7 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
         //jika Anda sampai di sini, Anda telah terhubung ke WiFi    
         Serial.println("connected...yeey :)");
     }
+//=================================================End-Of-WifiManager-Module==============================================================
 //============================================End-Of-Do-Not-Change-On-This-Section========================================================
   delay(6000);
   lcd.clear();
@@ -154,12 +152,9 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
   else{
     Serial.println("Connected Failed!!!");
   }
-  
 }
-
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
 String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
-
 // Fungsi untuk text skrol Judul projek
 // Fungsi menerima argumen berikut::
 // row: nomor baris tempat teks akan ditampilkan
@@ -177,6 +172,7 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
     delay(delayTime);
   }
 }
+//=====================================================End-Of-Wifi-Module==================================================================
 //======================================================End-Of-Void-Setup==================================================================
 //============================================End-Of-Do-Not-Change-On-This-Section=========================================================
 //=========================================================Void-Loop=======================================================================
