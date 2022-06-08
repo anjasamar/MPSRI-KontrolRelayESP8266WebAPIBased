@@ -4,9 +4,11 @@
 //Author: master Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
+//Official Web API Service: http://mpsri.atwebpages.com                           |
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
+//===============================================Do-Not-Change-On-This-Section================================================================
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266HTTPClient.h>
@@ -16,7 +18,8 @@
 #include <Wire.h>
 #include <WiFiManager.h>         // https://github.com/tzapu/WiFiManager
 #include <DNSServer.h>
-
+//======================================================End-Of-Perpus-Fungsi==================================================================
+//============================================End-Of-Do-Not-Change-On-This-Section============================================================
 //===========================================================Setup-LCD========================================================================
 // atur jumlah kolom dan baris LCD
 int lcdColumns = 16;
@@ -27,34 +30,32 @@ int lcdRows = 2;
 // abaikan jika error terjadi saat kompiler, yang mengatakan tidak support untuk jenis board anda selain AVR,
 // ini saya menggunakan perpustakaan dan mengubahnya di properti perpustakaan lalu menambahkan perangkat modul saya.
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
-
+//=======================================================End-Of-Setup-LCD=====================================================================
 //=========================================================Setup-Server=======================================================================
 //Alamat Server Api
-String host = "Alamat-Server-Anda"; //Contoh: anjasganteng.com
+String host = "mpsri.atwebpages.com"; //Contoh: www.anjasganteng.com (tanpa tanda baca, dan http:// atau http://
+
 // Set web server port number to 80
 //Cek Alamat Server Dapat Terhubung
 const int httpPort = 80;
-
 //Fungsi Limit Request On/Off Dari Web Ke ESP
 const long interval = 100; //10000
 unsigned long previousMillis = 0;
-
+//======================================================End-Of-Setup-Server===================================================================
 //=========================================================Setup-WiFi=========================================================================
 //Fungsi Kredensial Koneksi WiFi Manual, Silakan Isi Data Di bawah, Jika Anda Menggunakan Fitur Ini Setup Wifi Manager Tidak Akan Bekerja
 const char* ssid = ""; //masukkan ssid
 const char* password = ""; //masukkan password
 const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
-
 //=========================================================Setup-IDBoard======================================================================
-//ID Board Bebas Angka 1-seterusnya
-int board = 1;
+//ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
+String api = "atsi-mpsri-1234567890"; //Token Contoh: atsi-mpsri-xxxxxxxxxx
+//======================================================End-Of-Perpus-Fungsi==================================================================
 
-//==========================================================Void-Setup=========================================================================
+//==========================================================Void-Setup========================================================================
 void setup () {
-
 Serial.begin(115200);
-  
   String messageStartUp = "Memulai Sistem";
   String messageSetupWifi = "Silakan Atur Koneksi Wifi Pada Akses Poin ESP-MPSRI-SETUP Untuk Menggunakan MPSRI";
   Serial.print("Memulai Sistem Tunggu...");
@@ -72,15 +73,15 @@ Serial.begin(115200);
   lcd.blink();
   delay(3000);
   lcd.clear();
-  lcd.blink();
   lcd.setCursor(0,1);
   lcd.print("Atur Koneksi!>");
+  lcd.blink();
   lcd.setCursor(0,0);
   // print pesan skrol
   scrollText(0, messageSetupWifi, 260, lcdColumns);
   delay(3000);
-  
 //=====================================================WiFiManager-Module========================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
 //Fungsi Kredensial Koneksi WiFi Sistem Web WifiManager
 WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
     WiFiManager wm;
@@ -103,7 +104,8 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
         //jika Anda sampai di sini, Anda telah terhubung ke WiFi    
         Serial.println("connected...yeey :)");
     }
-
+//=================================================End-Of-WifiManager-Module==============================================================
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
   delay(6000);
   lcd.clear();
   lcd.setCursor(0,0);
@@ -135,6 +137,7 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
   lcd.noBlink();
   lcd.clear();
 //=========================================================WiFi-Module========================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
 //Module Wifi Jika Menggunakan Pengaturan Manual
   WiFi.hostname("Perangkat Driver Relay");
   WiFi.begin(ssid, password); 
@@ -149,12 +152,9 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
   else{
     Serial.println("Connected Failed!!!");
   }
-  
 }
-
 // Sring Data Untuk Kebutuhan Text Scrolling LCD
 String messageToScroll = "Metode Pembelajaran Saklar Relay Dengan ESP8266";
-
 // Fungsi untuk text skrol Judul projek
 // Fungsi menerima argumen berikut::
 // row: nomor baris tempat teks akan ditampilkan
@@ -172,34 +172,30 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
     delay(delayTime);
   }
 }
-
-//=========================================================Void-Loop=========================================================================
+//=====================================================End-Of-Wifi-Module==================================================================
+//======================================================End-Of-Void-Setup==================================================================
+//============================================End-Of-Do-Not-Change-On-This-Section=========================================================
+//=========================================================Void-Loop=======================================================================
 void loop() {
-  
-//====================================================WebAPIRequest-Module===================================================================
+//====================================================WebAPIRequest-Module=================================================================
+//===============================================Do-Not-Change-On-This-Section=============================================================
   //Declare object of class HTTPClient
   WiFiClient client;
   HTTPClient http;
-
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/relaykontrol/proses.php?board="+String(board); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
+  LinkRelay = "http://"+String(host)+"/api.php?id_token="+String(api);
   http.begin(client, LinkRelay);
-  
     //Fungsi Mendapatkan Balasan HTTP Request     
     int httpCode = http.GET();
-    
     //Fungsi Untuk Mengituli Limit Request On/Off Yang Tadi Di Awal Program
     unsigned long currentMillis = millis();
-
   //Fungsi Payload Atau Pemanggialan Dan Penerimaan Data Status I/O High/Low Pada Pin GPIO
   if(currentMillis - previousMillis >= interval) {
       if (WiFi.status() == WL_CONNECTED) {
-
         //Jika Status Server Tidak Terhubung Maka Akan Mengeluarkan Hasil Output -Digit Contoh -1 Pada LCD, Sebaliknya Jika Status Server Terhubung Maka Akan Mengrluarkan Output >Digit Contoh 200
         if (httpCode > 0) {
-          
             //Membaca Status Server Api
             String payload = http.getString();
             JSONVar myObject = JSON.parse(payload);
@@ -209,7 +205,6 @@ void loop() {
             Serial.print(httpCode);
             Serial.println(myObject);
             JSONVar keys = myObject.keys();
-
             //Membaca Status Value Output Server Api, Lalu Memulai Program Ke Relay
             for (int i = 0; i < keys.length(); i++) {
                 JSONVar value = myObject[keys[i]];
@@ -225,17 +220,16 @@ void loop() {
         http.end();
       }
   }
-
+//===============================================End-Of-WebAPIRequest-Module==============================================================
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
   //Menampilkan Status Kode HTTP Respond, Dan Status Alamat WiFi
   Serial.println(LinkRelay);
-  
   //Cek Status Port Server Apakah Dapat Terhubung
   if(!client.connect(host, httpPort)){
      Serial.print("Gagal Terhubung Ke Server Api -> ");
   }
   Serial.print("Berhasil Terhubung Ke Server Api -> ");
-  
-//====================================================LCD-Info-Module===================================================================
+//====================================================LCD-Info-Module=====================================================================
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("Status Updated >");
@@ -261,10 +255,12 @@ void loop() {
   lcd.print("Dalam 3 detik...");
   delay(3000);
 }
-
+//===============================================End-Of-LCD-Info-Module==============================================================
+//===================================================End-Of-Void-Loop================================================================
 //---------------------------------------------------------------------------------
 //Project: Kontrol Relay Berbasis Web API Request, LCD Monitor, Dan WiFiManager   |
 //Author: Anjas Amar Pradana                                                      |
 //Mail: atsidev.io@gmail.com                                                      |
 //Program khusus board: esp8266 (Nodemcu)                                         |
+//Official Web API Service: http://mpsri.atwebpages.com                           |
 //---------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
-# KontrolRelayESP8266WebAPIBased
-To Decrypt WebAPI Dir File, Please Contact Us On: atsidev.io@gmail.com / Rizkiheripurwanto99@gmail.com
+# MPSRI-KontrolRelayESP8266WebAPIBased (Metode Pembelajaran Saklar Relay IoT Berbasis Web API)
+- To Create Project And Get Token Key, Please Login Or Signup On (MPSRI Official Web Service) http://mpsri.atwebpages.com OR http://mpsri.my-board.org
 
 
 # 💫About Me :
