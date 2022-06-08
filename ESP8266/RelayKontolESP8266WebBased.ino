@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------------
 
 //=========================================================Perpus-Fungsi======================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266HTTPClient.h>
@@ -17,7 +18,7 @@
 #include <Wire.h>
 #include <WiFiManager.h>         // https://github.com/tzapu/WiFiManager
 #include <DNSServer.h>
-
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
 //===========================================================Setup-LCD========================================================================
 // atur jumlah kolom dan baris LCD
 int lcdColumns = 16;
@@ -50,7 +51,7 @@ const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 
 //=========================================================Setup-IDBoard======================================================================
 //ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
-String api = "atsi-mpsri-1234567890"; //Token Contoh: XXXXXXXXXXXXXXXXXXXX
+String api = "atsi-mpsri-1234567890"; //Token Contoh: atsi-mpsri-xxxxxxxxxx
 
 //==========================================================Void-Setup=========================================================================
 void setup () {
@@ -83,6 +84,7 @@ Serial.begin(115200);
   delay(3000);
   
 //=====================================================WiFiManager-Module========================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
 //Fungsi Kredensial Koneksi WiFi Sistem Web WifiManager
 WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
     WiFiManager wm;
@@ -105,7 +107,7 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
         //jika Anda sampai di sini, Anda telah terhubung ke WiFi    
         Serial.println("connected...yeey :)");
     }
-
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
   delay(6000);
   lcd.clear();
   lcd.setCursor(0,0);
@@ -137,6 +139,7 @@ WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
   lcd.noBlink();
   lcd.clear();
 //=========================================================WiFi-Module========================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
 //Module Wifi Jika Menggunakan Pengaturan Manual
   WiFi.hostname("Perangkat Driver Relay");
   WiFi.begin(ssid, password); 
@@ -174,11 +177,11 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
     delay(delayTime);
   }
 }
-
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
 //=========================================================Void-Loop=========================================================================
 void loop() {
-  
 //====================================================WebAPIRequest-Module===================================================================
+//===============================================Do-Not-Change-On-This-Section===================================================================
   //Declare object of class HTTPClient
   WiFiClient client;
   HTTPClient http;
@@ -186,7 +189,7 @@ void loop() {
   //Konfrensi Alamat Server Api
   String LinkRelay;
   String URLServer = "http://"+String(host);
-  LinkRelay = "http://"+String(host)+"/api.php?id_token="+String(api); //Sesuaikan Dengan Direktori Web Server Anda Ya Pada (/relaykontrol/)
+  LinkRelay = "http://"+String(host)+"/api.php?id_token="+String(api);
   http.begin(client, LinkRelay);
   
     //Fungsi Mendapatkan Balasan HTTP Request     
@@ -236,8 +239,8 @@ void loop() {
      Serial.print("Gagal Terhubung Ke Server Api -> ");
   }
   Serial.print("Berhasil Terhubung Ke Server Api -> ");
-  
-//====================================================LCD-Info-Module===================================================================
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
+//====================================================LCD-Info-Module=====================================================================
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("Status Updated >");
