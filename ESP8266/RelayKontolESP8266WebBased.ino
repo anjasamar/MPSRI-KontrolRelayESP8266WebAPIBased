@@ -220,6 +220,8 @@ void loop() {
         http.end();
       }
   }
+//===============================================End-Of-WebAPIRequest-Module==============================================================
+//============================================End-Of-Do-Not-Change-On-This-Section========================================================
   //Menampilkan Status Kode HTTP Respond, Dan Status Alamat WiFi
   Serial.println(LinkRelay);
   //Cek Status Port Server Apakah Dapat Terhubung
@@ -227,8 +229,6 @@ void loop() {
      Serial.print("Gagal Terhubung Ke Server Api -> ");
   }
   Serial.print("Berhasil Terhubung Ke Server Api -> ");
-//===============================================End-Of-WebAPIRequest-Module==============================================================
-//============================================End-Of-Do-Not-Change-On-This-Section========================================================
 //====================================================LCD-Info-Module=====================================================================
   lcd.clear();
   lcd.setCursor(0,0);
@@ -255,6 +255,7 @@ void loop() {
   lcd.print("Dalam 3 detik...");
   delay(3000);
 }
+//===================================================End-Of-Void-Loop================================================================
 //===============================================End-Of-LCD-Info-Module==============================================================
 //---------------------------------------------------------------------------------
 //Project: Kontrol Relay Berbasis Web API Request, LCD Monitor, Dan WiFiManager   |
