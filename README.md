@@ -1,5 +1,5 @@
 # MPSRI-KontrolRelayESP8266WebAPIBased (Metode Pembelajaran Saklar Relay IoT Berbasis Web API)
-- To Create Project And Get Token Key, Please Login Or Signup On (MPSRI Official Web Service) http://mpsri.atwebpages.com OR http://mpsri.my-board.org
+- To Create Project And Get Token Key, Please Login Or Signup On (MPSRI Official Web Service) http://mpsri.atwebpages.com
 
 
 # 💫About Me :
