@@ -50,7 +50,7 @@ const char* namaAP = "ESP-MPSRI-SETUP"; //Ubah Nama Akses Poin Setup
 const char* passwordAP = "atsidevio"; //Ubah Sandi Akses Poin Setup
 //=========================================================Setup-IDBoard======================================================================
 //ID Token Board, Silakan Masuk Ke Akun Anda Untuk Melihat Token Anda Sendiri
-String api = "atsi-mpsri-1234567890"; //Token Contoh: atsi-mpsri-xxxxxxxxxx
+String api = "1234567890"; //Token Contoh: 123xxxxxxx
 //======================================================End-Of-Perpus-Fungsi==================================================================
 
 //==========================================================Void-Setup========================================================================
